@@ -70,21 +70,21 @@ func (n Node) ClearParent() {
 }
 
 func (n Node) TraverseInorder() {
-    if n.Left != nil {n.Left.TraverseInorder()}
+    if n.checkLeft() {n.Left.TraverseInorder()}
     fmt.Println(n.content.GetValue())
-    if n.Right != nil {n.Right.TraverseInorder()}
+    if n.checkRight() {n.Right.TraverseInorder()}
 }
 
 func (n Node) TraversePostorder() {
-    if n.Left != nil {n.Left.TraversePostorder()}
-    if n.Right != nil {n.Right.TraversePostorder()}
+    if n.checkLeft() {n.Left.TraversePostorder()}
+    if n.checkRight() {n.Right.TraversePostorder()}
     fmt.Println(n.content.GetValue())
 }
 
 func (n Node) TraversePreorder() {
     fmt.Println(n.content.GetValue())
-    if n.Left != nil {n.Left.TraversePreorder()}
-    if n.Right != nil {n.Right.TraversePreorder()}
+    if n.checkLeft() {n.Left.TraversePreorder()}
+    if n.checkRight() {n.Right.TraversePreorder()}
 }
 
 func (n Node) ShiftLeft() {
