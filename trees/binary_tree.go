@@ -99,7 +99,6 @@ func (n Node) ShiftLeft() {
         n.Right.ClearParent()
     }
     n.Right.SetLeft(&n)
-    n.SetParent(n.Right)
     n.ClearRight()
 }
 
@@ -113,7 +112,6 @@ func (n Node) ShiftRight() {
         n.Left.ClearParent()
     }
     n.Left.SetRight(&n)
-    n.SetParent(n.Left)
     n.Left.ClearLeft()
 }
 
