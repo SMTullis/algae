@@ -11,10 +11,12 @@ type Node struct {
 
 func (n *Node) SetLeft(left *Node) {
     n.Left = left
+    n.Left.SetParent(n)
 }
 
 func (n *Node) SetRight(right *Node) {
     n.Right = right
+    n.Right.SetParent(n)
 }
 
 func (n *Node) SetParent(parent *Node) {
