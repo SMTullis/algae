@@ -27,26 +27,26 @@ func (n Node) GetContent() Container {
 
 func (n Node) InsertNode(other *Node) {
     if n.content.IsGreater(other.GetContent()) {
-        n.checkLeft(other)
+        if n.checkLeft() {
+            n.Left.InsertNode(other)
+        } else {
+            n.SetLeft(other)
+        }
     } else if n.content.IsLesser(other.GetContent()) {
-        n.checkRight(other)
+        if n.checkRight() {
+            n.Right.InsertNode(other)
+        } else {
+            n.SetRight(other)
+        }
     }
 }
 
-func (n Node) checkLeft(other *Node) {
-    if n.Left == nil {
-        n.SetLeft(other)
-    } else {
-        n.Left.InsertNode(other)
-    }
+func (n Node) checkLeft() bool {
+    return n.Left != nil
 }
 
-func (n Node) checkRight(other *Node) {
-    if n.Right == nil {
-        n.SetRight(other)
-    } else {
-        n.Right.InsertNode(other)
-    }
+func (n Node) checkRight() bool {
+    return n.Right != nil
 }
 
 func (n Node) TraverseInorder() {
