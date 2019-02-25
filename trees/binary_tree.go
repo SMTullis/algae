@@ -25,6 +25,10 @@ func (n Node) GetContent() Container {
     return n.content
 }
 
+func (n Node) SetContent(content Container) {
+    n.content = content
+}
+
 func (n Node) InsertNode(other *Node) {
     if n.content.IsGreater(other.GetContent()) {
         if n.checkLeft() {
