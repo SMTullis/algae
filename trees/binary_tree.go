@@ -67,6 +67,26 @@ func (n Node) TraversePreorder() {
     if n.Right != nil {n.Right.TraversePreorder()}
 }
 
+func (n Node) ShiftLeft() {
+    if n.checkRight() {
+        n.Right.ShiftRight()
+    }
+    n.Right.SetParent(n.Parent)
+    n.Right.SetLeft(&n)
+    n.SetParent(n.Right)
+    n.Right = nil
+}
+
+func (n Node) ShiftRight() {
+    if n.checkLeft() {
+        n.Left.ShiftLeft()
+    }
+    n.Left.SetParent(n.Parent)
+    n.Left.SetRight(&n)
+    n.SetParent(n.Left)
+    n.Left = nil
+}
+
 type Container struct {
     value string
 }
