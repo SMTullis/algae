@@ -49,6 +49,22 @@ func (n Node) checkRight() bool {
     return n.Right != nil
 }
 
+func (n Node) checkParent() bool {
+    return n.Parent != nil
+}
+
+func (n Node) ClearLeft() {
+    n.Left = nil
+}
+
+func (n Node) ClearRight() {
+    n.Right = nil
+}
+
+func (n Node) ClearParent() {
+    n.Parent = nil
+}
+
 func (n Node) TraverseInorder() {
     if n.Left != nil {n.Left.TraverseInorder()}
     fmt.Println(n.content.GetValue())
@@ -71,20 +87,28 @@ func (n Node) ShiftLeft() {
     if n.checkRight() {
         n.Right.ShiftRight()
     }
-    n.Right.SetParent(n.Parent)
+    if n.checkParent() {
+        n.Right.SetParent(n.Parent)
+    } else {
+        n.Right.ClearParent()
+    }
     n.Right.SetLeft(&n)
     n.SetParent(n.Right)
-    n.Right = nil
+    n.ClearRight()
 }
 
 func (n Node) ShiftRight() {
     if n.checkLeft() {
         n.Left.ShiftLeft()
     }
-    n.Left.SetParent(n.Parent)
+    if n.checkParent() {
+        n.Left.SetParent(n.Parent)
+    } else {
+        n.Left.ClearParent()
+    }
     n.Left.SetRight(&n)
     n.SetParent(n.Left)
-    n.Left = nil
+    n.Left.ClearLeft()
 }
 
 type Container struct {
