@@ -115,6 +115,19 @@ func (n Node) ShiftRight() {
     n.Left.ClearLeft()
 }
 
+func (n Node) Search(value string) *Container {
+    var out *Container
+    self := n.GetContent()
+    if x := (*self).GetValue(); value == x{
+        out = self
+    } else if n.checkLeft() && value < x {
+        out = n.Left.Search(value)
+    } else if n.checkRight() {
+        out = n.Right.Search(value)
+    }
+    return out
+}
+
 type Container struct {
     value string
 }
