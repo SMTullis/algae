@@ -1,6 +1,9 @@
 package algae
 
-import "fmt"
+import (
+    "errors"
+    "fmt"
+)
 
 type Node struct {
     content Container
@@ -115,21 +118,33 @@ func (n Node) ShiftRight() {
     n.Left.ClearLeft()
 }
 
-func (n Node) Find(value string) *Container {
-    return (*n.Search(value)).GetContent()
+func (n Node) Find(value string) (*Container, error) {
+    if match, err := n.Search(value); err != nil {
+        return nil, err
+    } else {
+        return (*match).GetContent(), nil
+    }
 }
 
-func (n Node) Search(value string) *Node {
-    var out *Node
-    self := n.GetContent()
-    if x := (*self).GetValue(); value == x {
-        out = &n
-    } else if n.checkLeft() && value < x {
-        out = n.Left.Search(value)
-    } else if n.checkRight() {
-        out = n.Right.Search(value)
+func (n Node) Search(value string) (*Node, error) {
+    if match := n.search(value); match == nil {
+        return match, errors.New("Value not found.")
+    } else {
+        return match, nil
     }
-    return out
+}
+
+func (n Node) search(value string) *Node {
+    var match *Node
+    self := n.GetContent()
+    if x := self.GetValue(); value == x {
+        match = &n
+    } else if n.checkLeft() && value < x {
+        match = n.Left.search(value)
+    } else if n.checkRight() {
+        match = n.Right.search(value)
+    }
+    return match
 }
 
 type Container struct {
