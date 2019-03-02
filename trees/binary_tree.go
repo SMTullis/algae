@@ -118,7 +118,7 @@ func (n Node) ShiftRight() {
 func (n Node) Search(value string) *Container {
     var out *Container
     self := n.GetContent()
-    if x := (*self).GetValue(); value == x{
+    if x := (*self).GetValue(); value == x {
         out = self
     } else if n.checkLeft() && value < x {
         out = n.Left.Search(value)
