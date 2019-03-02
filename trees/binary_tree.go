@@ -34,16 +34,16 @@ func (n Node) setContent(content Container) {
     n.content = content
 }
 
-func (n Node) InsertNode(other *Node) {
+func (n Node) Insert(other *Node) {
     if n.content.IsGreater(*other.GetContent()) {
         if n.checkLeft() {
-            n.left.InsertNode(other)
+            n.left.Insert(other)
         } else {
             n.setLeft(other)
         }
     } else if n.content.IsLesser(*other.GetContent()) {
         if n.checkRight() {
-            n.right.InsertNode(other)
+            n.right.Insert(other)
         } else {
             n.setRight(other)
         }
