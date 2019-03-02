@@ -140,9 +140,9 @@ func (n Node) search(value string) *Node {
     if x := self.GetValue(); value == x {
         match = &n
     } else if n.checkLeft() && value < x {
-        match = n.Left.search(value)
+        match = n.left.search(value)
     } else if n.checkRight() {
-        match = n.Right.search(value)
+        match = n.right.search(value)
     }
     return match
 }
