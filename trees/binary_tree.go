@@ -115,11 +115,15 @@ func (n Node) ShiftRight() {
     n.Left.ClearLeft()
 }
 
-func (n Node) Search(value string) *Container {
-    var out *Container
+func (n Node) Find(value string) *Container {
+    return (*n.Search(value)).GetContent()
+}
+
+func (n Node) Search(value string) *Node {
+    var out *Node
     self := n.GetContent()
     if x := (*self).GetValue(); value == x {
-        out = self
+        out = &n
     } else if n.checkLeft() && value < x {
         out = n.Left.Search(value)
     } else if n.checkRight() {
