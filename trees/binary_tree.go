@@ -12,17 +12,17 @@ type Node struct {
     Right *Node
 }
 
-func (n *Node) SetLeft(left *Node) {
+func (n *Node) setLeft(left *Node) {
     n.Left = left
-    n.Left.SetParent(n)
+    n.Left.setParent(n)
 }
 
-func (n *Node) SetRight(right *Node) {
+func (n *Node) setRight(right *Node) {
     n.Right = right
-    n.Right.SetParent(n)
+    n.Right.setParent(n)
 }
 
-func (n *Node) SetParent(parent *Node) {
+func (n *Node) setParent(parent *Node) {
     n.Parent = parent
 }
 
@@ -30,7 +30,7 @@ func (n Node) GetContent() *Container {
     return &n.content
 }
 
-func (n Node) SetContent(content Container) {
+func (n Node) setContent(content Container) {
     n.content = content
 }
 
@@ -39,13 +39,13 @@ func (n Node) InsertNode(other *Node) {
         if n.checkLeft() {
             n.Left.InsertNode(other)
         } else {
-            n.SetLeft(other)
+            n.setLeft(other)
         }
     } else if n.content.IsLesser(*other.GetContent()) {
         if n.checkRight() {
             n.Right.InsertNode(other)
         } else {
-            n.SetRight(other)
+            n.setRight(other)
         }
     }
 }
@@ -62,15 +62,15 @@ func (n Node) checkParent() bool {
     return n.Parent != nil
 }
 
-func (n Node) ClearLeft() {
+func (n Node) clearLeft() {
     n.Left = nil
 }
 
-func (n Node) ClearRight() {
+func (n Node) clearRight() {
     n.Right = nil
 }
 
-func (n Node) ClearParent() {
+func (n Node) clearParent() {
     n.Parent = nil
 }
 
@@ -92,30 +92,30 @@ func (n Node) TraversePreorder() {
     if n.checkRight() {n.Right.TraversePreorder()}
 }
 
-func (n Node) ShiftLeft() {
+func (n Node) shiftLeft() {
     if n.checkRight() {
-        n.Right.ShiftRight()
+        n.Right.shiftRight()
     }
     if n.checkParent() {
-        n.Right.SetParent(n.Parent)
+        n.Right.setParent(n.Parent)
     } else {
-        n.Right.ClearParent()
+        n.Right.clearParent()
     }
-    n.Right.SetLeft(&n)
-    n.ClearRight()
+    n.Right.setLeft(&n)
+    n.clearRight()
 }
 
-func (n Node) ShiftRight() {
+func (n Node) shiftRight() {
     if n.checkLeft() {
-        n.Left.ShiftLeft()
+        n.Left.shiftLeft()
     }
     if n.checkParent() {
-        n.Left.SetParent(n.Parent)
+        n.Left.setParent(n.Parent)
     } else {
-        n.Left.ClearParent()
+        n.Left.clearParent()
     }
-    n.Left.SetRight(&n)
-    n.Left.ClearLeft()
+    n.Left.setRight(&n)
+    n.Left.clearLeft()
 }
 
 func (n Node) Find(value string) (*Container, error) {
