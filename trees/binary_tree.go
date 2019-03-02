@@ -23,8 +23,8 @@ func (n *Node) SetParent(parent *Node) {
     n.Parent = parent
 }
 
-func (n Node) GetContent() Container {
-    return n.content
+func (n Node) GetContent() *Container {
+    return &n.content
 }
 
 func (n Node) SetContent(content Container) {
@@ -32,13 +32,13 @@ func (n Node) SetContent(content Container) {
 }
 
 func (n Node) InsertNode(other *Node) {
-    if n.content.IsGreater(other.GetContent()) {
+    if n.content.IsGreater(*other.GetContent()) {
         if n.checkLeft() {
             n.Left.InsertNode(other)
         } else {
             n.SetLeft(other)
         }
-    } else if n.content.IsLesser(other.GetContent()) {
+    } else if n.content.IsLesser(*other.GetContent()) {
         if n.checkRight() {
             n.Right.InsertNode(other)
         } else {
