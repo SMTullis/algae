@@ -147,6 +147,44 @@ func (n Node) search(value string) *Node {
     return match
 }
 
+func (n Node) Delete(value string) error {
+    match, err := n.Search(value)
+    if err != nil {
+        match.delete()
+    }
+    return err
+}
+
+func (n Node) delete() {
+    if n.checkParent() {
+        if n.parent.GetContent().IsGreater(*n.GetContent()) {
+            if n.checkRight() {
+                n.right.shiftRight()
+                n.right.setLeft(n.left)
+                n.right.setParent(n.parent)
+            }
+            n.parent.setLeft(n.right)
+        } else {
+            if n.checkLeft() {
+                n.left.shiftLeft()
+                n.left.setRight(n.right)
+                n.left.setParent(n.parent)
+            }
+            n.parent.setRight(n.left)
+        }
+    } else {
+        if n.checkRight() {
+            n.right.shiftRight()
+            n.right.setLeft(n.left)
+            n.right.setParent(n.parent)
+        } else if n.checkLeft() {
+            n.left.shiftLeft()
+            n.left.setRight(n.right)
+            n.left.setParent(n.parent)
+        }
+    }
+}
+
 type Container struct {
     value string
 }
