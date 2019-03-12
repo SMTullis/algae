@@ -11,7 +11,7 @@ func Test_MergeSort(t *testing.T) {
     expect := [10]int{1,2,3,4,5,6,7,8,9,10}
     for index := range sorted {
         if sorted[index] != expect[index] {
-            panic("Not sorted")
+            fmt.Printf("Not sorted: %v != %v", sorted[index], expect[index])
         }
     }
 }
