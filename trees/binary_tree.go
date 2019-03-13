@@ -1,4 +1,4 @@
-package algae
+package tree
 
 import (
     "errors"
