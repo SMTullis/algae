@@ -1,4 +1,4 @@
-package algae
+package sort
 
 func MergeSort(arr []int) []int {
     length := len(arr)
