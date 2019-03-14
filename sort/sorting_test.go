@@ -15,3 +15,13 @@ func Test_MergeSort(t *testing.T) {
         }
     }
 }
+
+func Test_PigeonSort(t *testing.T) {
+    sorted := sort.PigeonSort([]string{"six", "five", "one", "five", "five", "six", "one", "five", "five",  "one", "five"})
+    expect := [11]string{"five", "five", "five", "five", "five", "five", "one", "one", "one", "six", "six"}
+    for index := range sorted {
+        if sorted[index] != expect[index] {
+            fmt.Printf("Not sorted: %v != %v", sorted[index], expect[index])
+        }
+    }
+}

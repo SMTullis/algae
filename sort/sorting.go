@@ -29,3 +29,17 @@ func merge(front, back []int) []int {
     }
     return out
 }
+
+func PigeonSort(unsorted []string) []string {
+    holes := make(map[string][]string)
+    for _, value := range unsorted {
+        holes[value] = append(holes[value], value)
+    }
+    var out []string
+    for _, each := range holes {
+        for _, x := range each {
+            out = append(out, x)
+        }
+    }
+    return out
+}
