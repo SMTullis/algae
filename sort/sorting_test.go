@@ -1,7 +1,6 @@
 package sort
 
 import (
-    "fmt"
     "testing"
 )
 
@@ -10,7 +9,7 @@ func Test_MergeSort(t *testing.T) {
     expect := [10]int{1,2,3,4,5,6,7,8,9,10}
     for index := range sorted {
         if sorted[index] != expect[index] {
-            fmt.Printf("Not sorted: %v != %v", sorted[index], expect[index])
+            t.Errorf("Not sorted: %v != %v", sorted[index], expect[index])
         }
     }
 }
@@ -20,7 +19,7 @@ func Test_PigeonSort(t *testing.T) {
     expect := [11]string{"five", "five", "five", "five", "five", "five", "one", "one", "one", "six", "six"}
     for index := range sorted {
         if sorted[index] != expect[index] {
-            fmt.Printf("Not sorted: %v != %v", sorted[index], expect[index])
+            t.Errorf("Not sorted: %v != %v", sorted[index], expect[index])
         }
     }
 }
